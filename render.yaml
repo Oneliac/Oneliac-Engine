@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: oneliac-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn agents.api:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHONPATH
+        value: .
+      - key: SOLANA_ENDPOINT
+        value: https://api.devnet.solana.com
